@@ -1,0 +1,16 @@
+{
+  "name": "inverse-kinematics-lab",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun ./index.html",
+    "build": "bun build ./index.html --outdir=dist"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
