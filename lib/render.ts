@@ -1,4 +1,5 @@
 import { type Bone, type Point } from "./math";
+import { getSlider } from "./utils";
 
 export function renderLeftBox(ctx: CanvasRenderingContext2D, c: HTMLCanvasElement) {
     ctx.fillStyle = "#001821";
@@ -54,4 +55,10 @@ export function renderPoint(point: Point, ctx: CanvasRenderingContext2D, color: 
     ctx.beginPath();
     ctx.arc(point.x, point.y, size, 0, 2 * Math.PI);
     ctx.fill();
+}
+
+export function renderValues(document: Document) {
+    document.getElementById("xValue")!.textContent = getSlider("xSlider").toString();
+    document.getElementById("yValue")!.textContent = getSlider("ySlider").toString();
+    document.getElementById("bonesValue")!.textContent = getSlider("bonesSlider").toString();
 }

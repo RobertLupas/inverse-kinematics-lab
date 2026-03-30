@@ -1,4 +1,4 @@
-import { renderBackground } from "./lib/render";
+import { renderBackground, renderValues } from "./lib/render";
 import { tryAndDisplayError } from "./lib/logHandlers";
 import { renderIK, stringToIKType } from "./lib/ik";
 import { getSlider, getSelector } from "./lib/utils";
@@ -24,6 +24,7 @@ else {
     }
 
     main();
+    renderValues(document);
     c.style.display = "block";
 
     // Event listeners
@@ -38,6 +39,8 @@ else {
                     stringToIKType(getSelector("ikType")), getSlider("bonesSlider")
                 )
             });
+
+            renderValues(document);
         });
     });
 }
