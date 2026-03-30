@@ -18,6 +18,12 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
         rightBox.style.top = `${(c.height / 16) + 24}px`;
 
+        let xSlider = document.getElementById("xSlider") as HTMLInputElement;
+        let ySlider = document.getElementById("ySlider") as HTMLInputElement;
+
+        let xTarget = parseFloat(xSlider.value);
+        let yTarget = parseFloat(ySlider.value);
+
         let xModifier = (c.width / 24) * 7.5;
         let yModifier = (c.height / 16) * 15 - 24;
 
@@ -27,7 +33,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
             { length: 150, angle: -Math.PI / 2 },
             { length: 150, angle: -Math.PI / 2 }
         ];
-        let target: Point = { x: xModifier - 100, y: yModifier - 100 };
+        let target: Point = { x: xModifier - xTarget, y: yModifier - yTarget };
 
         renderBones(base, fabrik(base, target, bones), ctx);
     }
