@@ -43,4 +43,13 @@ else {
             renderValues(document);
         });
     });
+
+    document.getElementById("resetBtn")!.addEventListener("click", () => {
+        (document.getElementById("xSlider") as HTMLInputElement).value = "50";
+        (document.getElementById("ySlider") as HTMLInputElement).value = "50";
+        (document.getElementById("bonesSlider") as HTMLInputElement).value = "3";
+        (document.getElementById("ikType") as HTMLSelectElement).selectedIndex = 0;
+        main();
+        renderValues(document);
+    });
 }
