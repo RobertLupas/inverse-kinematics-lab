@@ -2,7 +2,7 @@ import { type Bone, type Point } from "./math";
 import { renderBones, renderLeftBox, renderPoint } from "./render";
 import { fabrik } from "./ik-algos/fabrik";
 
-export enum IKType {
+enum IKType {
     FABRIK = "FABRIK",
 }
 
