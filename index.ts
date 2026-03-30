@@ -1,80 +1,42 @@
-import { type Bone, type Point } from "./lib/math";
-import { fabrik } from "./lib/fabrik";
-import { renderBackground, renderBones, renderLeftBox } from "./lib/render";
+import { renderBackground } from "./lib/render";
+import { tryAndDisplayError } from "./lib/logHandlers";
+import { renderIK, stringToIKType } from "./lib/ik";
+import { getSlider, getSelector } from "./lib/utils";
 
 var c = document.getElementById("main") as HTMLCanvasElement;
 
-if (screen.availWidth < 800 || screen.availHeight < 700) {
-    document.getElementById("warning")!.style.display = "flex";
-} else {
+if (screen.availWidth < 800 || screen.availHeight < 700) document.getElementById("warning")!.style.display = "flex";
+else {
+    document.body.style.overflow = "clip";
     var ctx = c.getContext("2d") as CanvasRenderingContext2D;
-
-    function computeTarget(xSlider: HTMLInputElement, ySlider: HTMLInputElement, xModifier: number, yModifier: number): Point {
-        let xTarget = parseFloat(xSlider.value);
-        let yTarget = parseFloat(ySlider.value);
-
-        return { x: xModifier + xTarget, y: yModifier - yTarget };
-    }
-
-    function runIK() {
-        let xModifier = (c.width / 24) * 7.5;
-        let yModifier = (c.height / 16) * 15 - 48;
-
-        let base: Point = { x: xModifier, y: yModifier };
-        let bones: Bone[] = Array.from({ length: parseInt((document.getElementById("bonesSlider") as HTMLInputElement).value) }, () => ({
-            length: 150,
-            angle: -Math.PI / 2
-        }));
-
-        let target: Point = computeTarget((document.getElementById("xSlider") as HTMLInputElement), (document.getElementById("ySlider") as HTMLInputElement), xModifier, yModifier);
-
-        renderLeftBox(ctx, c);
-        try { bones = fabrik(base, target, bones) } catch (e) { throw e; };
-        renderBones(base, bones, ctx);
-    }
-
-    function tryAndDisplayError(func: () => void) {
-        clearLog();
-        try {
-            func();
-        } catch (e) {
-            displayLog((e as Error).message, true);
-        }
-    }
-
-    function displayLog(log: string, error: Boolean = false) {
-        clearLog();
-        (document.getElementById("logsTitle") as HTMLSpanElement).style.display = "block";
-        if (error) (document.getElementById("errors") as HTMLSpanElement).textContent = log;
-        else (document.getElementById("log") as HTMLSpanElement).textContent = log;
-    }
-
-    function clearLog() {
-        (document.getElementById("logsTitle") as HTMLSpanElement).style.display = "none";
-        (document.getElementById("log") as HTMLSpanElement).textContent = "";
-        (document.getElementById("errors") as HTMLSpanElement).textContent = "";
-    }
 
     function main() {
         renderBackground(c, ctx, document);
-
-        let rightBox = document.getElementById("rightBox") as HTMLDivElement;
-        rightBox.style.width = `${(c.width / 24) * 9 - 48}px`;
-        rightBox.style.height = `${(c.height / 16) * 14 - 48}px`;
-        rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
-        rightBox.style.top = `${(c.height / 16) + 24}px`;
-
-        tryAndDisplayError(() => { runIK(); });
+        tryAndDisplayError(() => {
+            renderIK(
+                c, ctx,
+                { x: (c.width / 24) * 7.5, y: (c.height / 16) * 15 - 48 },
+                { x: getSlider("xSlider"), y: getSlider("ySlider") },
+                stringToIKType(getSelector("ikType")), getSlider("bonesSlider")
+            )
+        });
     }
 
     main();
-
-    addEventListener("resize", () => { main(); });
-
-    ["xSlider", "ySlider", "bonesSlider"].forEach((id) => {
-        document.getElementById(id)!.addEventListener("input", () => { tryAndDisplayError(() => { runIK(); }); });
-    });
-
-    document.body.style.overflow = "clip";
     c.style.display = "block";
+
+    // Event listeners
+    addEventListener("resize", () => { main(); });
+    ["xSlider", "ySlider", "bonesSlider"].forEach((id) => {
+        document.getElementById(id)!.addEventListener("input", () => {
+            tryAndDisplayError(() => {
+                renderIK(
+                    c, ctx,
+                    { x: (c.width / 24) * 7.5, y: (c.height / 16) * 15 - 48 },
+                    { x: getSlider("xSlider"), y: getSlider("ySlider") },
+                    stringToIKType(getSelector("ikType")), getSlider("bonesSlider")
+                )
+            });
+        });
+    });
 }

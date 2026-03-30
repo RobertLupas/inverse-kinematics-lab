@@ -48,3 +48,10 @@ export function renderBones(base: Point, bones: Bone[], ctx: CanvasRenderingCont
         currentPoint = nextPoint;
     }
 }
+
+export function renderPoint(point: Point, ctx: CanvasRenderingContext2D, color: string = "#ff0000", size: number = 8) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, size, 0, 2 * Math.PI);
+    ctx.fill();
+}
