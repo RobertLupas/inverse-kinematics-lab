@@ -26,6 +26,13 @@ export function renderBackground(c: HTMLCanvasElement, ctx: CanvasRenderingConte
     }
 
     renderLeftBox(ctx, c);
+
+    // Right box
+    let rightBox = document.getElementById("rightBox") as HTMLDivElement;
+    rightBox.style.width = `${(c.width / 24) * 9 - 48}px`;
+    rightBox.style.height = `${(c.height / 16) * 14 - 48}px`;
+    rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
+    rightBox.style.top = `${(c.height / 16) + 24}px`;
 }
 
 export function renderBones(base: Point, bones: Bone[], ctx: CanvasRenderingContext2D) {
