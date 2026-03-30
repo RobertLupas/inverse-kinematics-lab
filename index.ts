@@ -17,13 +17,17 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         rightBox.style.height = `${(c.height / 16) * 14 - 48}px`;
         rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
         rightBox.style.top = `${(c.height / 16) + 24}px`;
-        let base: Point = { x: (c.width / 24) * 7.5, y: (c.height / 16) * 15 - 24 };
+
+        let xModifier = (c.width / 24) * 7.5;
+        let yModifier = (c.height / 16) * 15 - 24;
+
+        let base: Point = { x: xModifier, y: yModifier };
         let bones: Bone[] = [
             { length: 150, angle: -Math.PI / 2 },
             { length: 150, angle: -Math.PI / 2 },
             { length: 150, angle: -Math.PI / 2 }
         ];
-        let target: Point = { x: (c.width / 24) * 5.5, y: (c.height / 16) * 14 - 24 };
+        let target: Point = { x: xModifier - 100, y: yModifier - 100 };
 
         renderBones(base, fabrik(base, target, bones), ctx);
     }
