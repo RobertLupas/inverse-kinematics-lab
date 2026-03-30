@@ -26,10 +26,16 @@
     </div>
 
     <div id="rightBox"
-        style="position: absolute; display: flex; flex-direction: column; gap: 8px; background-color: #001821;">
-        <h1 style="text-align: center; color: white;">Inverse Kinematics Lab</h1>
-        <input id="xSlider" type="range" min="1" max="300" value="50">
-        <input id="ySlider" type="range" min="1" max="300" value="50">
+        style="position: absolute; display: flex; flex-direction: column; gap: 8px; background-color: #001821; color: white;">
+        <h1 style="text-align: center;">Inverse Kinematics Lab</h1>
+        <div style="width: 100%; display: flex; gap: 4px;">
+            <span>X: </span>
+            <input id="xSlider" type="range" min="-300" max="300" value="50" style="flex: 1;">
+        </div>
+        <div style="width: 100%; display: flex; gap: 4px;">
+            <span>Y: </span>
+            <input id="ySlider" type="range" min="0" max="300" value="50" style="flex: 1;">
+        </div>
     </div>
 
     <canvas id="main" style="display: none;"></canvas>

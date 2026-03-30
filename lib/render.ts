@@ -1,5 +1,10 @@
 import { type Bone, type Point } from "./math";
 
+export function renderLeftBox(ctx: CanvasRenderingContext2D, c: HTMLCanvasElement) {
+    ctx.fillStyle = "#001821";
+    ctx.fillRect(c.width / 24 + 24, c.height / 16 + 24, (c.width / 24) * 13 - 48, (c.height / 16) * 14 - 48);
+}
+
 export function renderBackground(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D, document: Document) {
     c.width = document.body.clientWidth;
     c.height = document.body.clientHeight;
@@ -20,8 +25,7 @@ export function renderBackground(c: HTMLCanvasElement, ctx: CanvasRenderingConte
         ctx.stroke();
     }
 
-    ctx.fillStyle = "#001821";
-    ctx.fillRect(c.width / 24 + 24, c.height / 16 + 24, (c.width / 24) * 13 - 48, (c.height / 16) * 14 - 48);
+    renderLeftBox(ctx, c);
 }
 
 export function renderBones(base: Point, bones: Bone[], ctx: CanvasRenderingContext2D) {
