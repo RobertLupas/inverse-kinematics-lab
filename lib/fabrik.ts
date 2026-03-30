@@ -23,7 +23,7 @@ export function fabrik(base: Point, target: Point, bones: Bone[], tolerance: num
         for (let i = points.length - 2; i >= 0; i--) {
             let dx = points[i]!.x - points[i + 1]!.x;
             let dy = points[i]!.y - points[i + 1]!.y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
+            let dist = distance(points[i]!, points[i + 1]!);
             let ratio = bones[i]!.length / dist;
             points[i] = {
                 x: points[i + 1]!.x + dx * ratio,
@@ -36,7 +36,7 @@ export function fabrik(base: Point, target: Point, bones: Bone[], tolerance: num
         for (let i = 0; i < points.length - 1; i++) {
             let dx = points[i + 1]!.x - points[i]!.x;
             let dy = points[i + 1]!.y - points[i]!.y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
+            let dist = distance(points[i + 1]!, points[i]!);
             let ratio = bones[i]!.length / dist;
             points[i + 1] = {
                 x: points[i]!.x + dx * ratio,
