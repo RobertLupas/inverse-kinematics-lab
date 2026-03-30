@@ -8,6 +8,7 @@ var c = document.getElementById("main") as HTMLCanvasElement;
 if (screen.availWidth < 800 || screen.availHeight < 700) document.getElementById("warning")!.style.display = "flex";
 else {
     document.body.style.overflow = "clip";
+    document.getElementById("rightBox")!.style.display = "flex";
     var ctx = c.getContext("2d") as CanvasRenderingContext2D;
 
     function main() {
