@@ -18,7 +18,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
 
     function runIK() {
         let xModifier = (c.width / 24) * 7.5;
-        let yModifier = (c.height / 16) * 15 - 24;
+        let yModifier = (c.height / 16) * 15 - 48;
 
         let base: Point = { x: xModifier, y: yModifier };
         const bones: Bone[] = Array.from({ length: parseInt((document.getElementById("bonesSlider") as HTMLInputElement).value) }, () => ({
