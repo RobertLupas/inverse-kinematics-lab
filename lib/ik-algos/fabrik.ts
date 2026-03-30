@@ -1,4 +1,4 @@
-import { type Bone, type Point, totalLength, distance } from "./math";
+import { type Bone, type Point, totalLength, distance } from "../math";
 
 export function fabrik(base: Point, target: Point, bones: Bone[], tolerance: number = 0.1): Bone[] {
     if (totalLength(bones) < Math.sqrt((target.x - base.x) ** 2 + (target.y - base.y) ** 2))
