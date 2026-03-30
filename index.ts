@@ -21,7 +21,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         let yModifier = (c.height / 16) * 15 - 48;
 
         let base: Point = { x: xModifier, y: yModifier };
-        const bones: Bone[] = Array.from({ length: parseInt((document.getElementById("bonesSlider") as HTMLInputElement).value) }, () => ({
+        let bones: Bone[] = Array.from({ length: parseInt((document.getElementById("bonesSlider") as HTMLInputElement).value) }, () => ({
             length: 150,
             angle: -Math.PI / 2
         }));
@@ -29,7 +29,27 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         let target: Point = computeTarget((document.getElementById("xSlider") as HTMLInputElement), (document.getElementById("ySlider") as HTMLInputElement), xModifier, yModifier);
 
         renderLeftBox(ctx, c);
-        renderBones(base, fabrik(base, target, bones), ctx);
+        try { bones = fabrik(base, target, bones) } catch (e) { throw e; };
+        renderBones(base, bones, ctx);
+    }
+
+    function tryAndDisplayError(func: () => void) {
+        try {
+            func();
+        } catch (e) {
+            displayLog((e as Error).message, true);
+        }
+    }
+
+    function displayLog(log: string, error: Boolean = false) {
+        clearLog();
+        if (error) (document.getElementById("errors") as HTMLSpanElement).textContent = log;
+        else (document.getElementById("log") as HTMLSpanElement).textContent = log;
+    }
+
+    function clearLog() {
+        (document.getElementById("log") as HTMLSpanElement).textContent = "";
+        (document.getElementById("errors") as HTMLSpanElement).textContent = "";
     }
 
     function main() {
@@ -41,7 +61,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
         rightBox.style.top = `${(c.height / 16) + 24}px`;
 
-        runIK();
+        tryAndDisplayError(() => { runIK(); });
     }
 
     main();
@@ -49,7 +69,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
     addEventListener("resize", () => { main(); });
 
     ["xSlider", "ySlider", "bonesSlider"].forEach((id) => {
-        document.getElementById(id)!.addEventListener("input", () => { runIK(); });
+        document.getElementById(id)!.addEventListener("input", () => { tryAndDisplayError(() => { runIK(); }); });
     });
 
     document.body.style.overflow = "clip";
