@@ -7,6 +7,6 @@
   },
   "scripts": {
     "dev": "bun ./index.html",
-    "build": "bun build ./index.html --outdir=dist --target=browser --minify"
+    "build": "bun build ./index.html --compile --outdir=dist --target=browser --minify"
   }
 }
