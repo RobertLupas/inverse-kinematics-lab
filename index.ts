@@ -44,6 +44,17 @@ else {
         });
     });
 
+    document.getElementById("ikType")!.addEventListener("change", () => {
+        tryAndDisplayError(() => {
+            renderIK(
+                c, ctx,
+                { x: (c.width / 24) * 7.5, y: (c.height / 16) * 15 - 48 },
+                { x: getSlider("xSlider"), y: getSlider("ySlider") },
+                stringToIKType(getSelector("ikType")), getSlider("bonesSlider")
+            )
+        });
+    });
+
     document.getElementById("resetBtn")!.addEventListener("click", () => {
         (document.getElementById("xSlider") as HTMLInputElement).value = "50";
         (document.getElementById("ySlider") as HTMLInputElement).value = "50";

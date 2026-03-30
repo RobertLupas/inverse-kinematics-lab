@@ -1,14 +1,17 @@
 import { type Bone, type Point } from "./math";
 import { renderBones, renderLeftBox, renderPoint } from "./render";
 import { fabrik } from "./ik-algos/fabrik";
+import { ccd } from "./ik-algos/ccd";
 
 enum IKType {
     FABRIK = "FABRIK",
+    CCD = "CCD"
 }
 
 export function stringToIKType(str: string): IKType {
     switch (str) {
         case "fabrik": return IKType.FABRIK;
+        case "ccd": return IKType.CCD;
         default: return IKType.FABRIK;
     }
 }
@@ -24,7 +27,10 @@ export function renderIK(c: HTMLCanvasElement, ctx: CanvasRenderingContext2D, ba
 
     try {
         switch (ikType) {
-            case IKType.FABRIK: bones = fabrik(base, target, bones)
+            case IKType.FABRIK: bones = fabrik(base, target, bones);
+                break;
+            case IKType.CCD: bones = ccd(base, target, bones);
+                break;
         }
     } catch (e) { throw e; };
 
