@@ -21,11 +21,11 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
         let yModifier = (c.height / 16) * 15 - 24;
 
         let base: Point = { x: xModifier, y: yModifier };
-        let bones: Bone[] = [
-            { length: 150, angle: -Math.PI / 2 },
-            { length: 150, angle: -Math.PI / 2 },
-            { length: 150, angle: -Math.PI / 2 }
-        ];
+        const bones: Bone[] = Array.from({ length: parseInt((document.getElementById("bonesSlider") as HTMLInputElement).value) }, () => ({
+            length: 150,
+            angle: -Math.PI / 2
+        }));
+
         let target: Point = computeTarget((document.getElementById("xSlider") as HTMLInputElement), (document.getElementById("ySlider") as HTMLInputElement), xModifier, yModifier);
 
         renderLeftBox(ctx, c);
@@ -48,7 +48,7 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
 
     addEventListener("resize", () => { main(); });
 
-    ["xSlider", "ySlider"].forEach((id) => {
+    ["xSlider", "ySlider", "bonesSlider"].forEach((id) => {
         document.getElementById(id)!.addEventListener("input", () => { runIK(); });
     });
 
