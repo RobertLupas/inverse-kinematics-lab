@@ -12,6 +12,11 @@ if (screen.availWidth < 800 || screen.availHeight < 700) {
     function main() {
         renderBackground(c, ctx, document);
 
+        let rightBox = document.getElementById("rightBox") as HTMLDivElement;
+        rightBox.style.width = `${(c.width / 24) * 9 - 48}px`;
+        rightBox.style.height = `${(c.height / 16) * 14 - 48}px`;
+        rightBox.style.left = `${(c.width / 24) * 14 + 24}px`;
+        rightBox.style.top = `${(c.height / 16) + 24}px`;
         let base: Point = { x: (c.width / 24) * 7.5, y: (c.height / 16) * 15 - 24 };
         let bones: Bone[] = [
             { length: 150, angle: -Math.PI / 2 },

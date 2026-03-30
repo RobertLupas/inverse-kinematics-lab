@@ -22,7 +22,6 @@ export function renderBackground(c: HTMLCanvasElement, ctx: CanvasRenderingConte
 
     ctx.fillStyle = "#001821";
     ctx.fillRect(c.width / 24 + 24, c.height / 16 + 24, (c.width / 24) * 13 - 48, (c.height / 16) * 14 - 48);
-    ctx.fillRect((c.width / 24) * 14 + 24, c.height / 16 + 24, (c.width / 24) * 9 - 48, (c.height / 16) * 14 - 48);
 }
 
 export function renderBones(base: Point, bones: Bone[], ctx: CanvasRenderingContext2D) {
