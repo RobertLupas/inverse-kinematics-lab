@@ -1,13 +1,13 @@
 # Inverse Kinematics Lab
 > [Live Demo](https://robertlupas.github.io/inverse-kinematics-lab/)
 
-A small browser demo for experimenting with 2D [inverse kinematics (IK)](https://en.wikipedia.org/wiki/Inverse_kinematics) using diferent algorithms. It could be useful if you want to see how diferent algorithms solve the IK, or even [plug in a custom algorithm](#using-a-custom-algo).
+A small browser demo for experimenting with 2D [inverse kinematics (IK)](https://en.wikipedia.org/wiki/Inverse_kinematics) using diferent algorithms. It could be useful if you want to see how different algorithms solve IK, or even [plug in a custom algorithm](#using-a-custom-algo).
 
 ## What it does
 
 - Draws a chain of bones from a fixed base point
-- Lets you move the target (X/Y) and and change the number of bones
-- Uses your prefered algorithm
+- Lets you move the target (X/Y) and change the number of bones
+- Uses your preferred algorithm
 - Shows errors like *target unreachable* when the target is beyond the chain's total length
 
 ## IK Algos
@@ -17,7 +17,7 @@ A small browser demo for experimenting with 2D [inverse kinematics (IK)](https:/
 
 ## Controls
 
-- **X/Y**: target possition offsets
+- **X/Y**: target position offsets
 - **Bones**: total number of bones
 - **IK Algorithm**: FABRIK/CCD
 - **Reset**: returns everything to the defaults
